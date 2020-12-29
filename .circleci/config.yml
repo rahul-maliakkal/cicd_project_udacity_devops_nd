@@ -63,7 +63,7 @@ jobs:
           command: |
              cd backend
              npm install
-             tsc
+             npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
@@ -78,6 +78,7 @@ jobs:
       - run:
           name: Frontend Test
           command: |
+            cd frontend
             npm test
                 
   test-backend:
@@ -90,6 +91,7 @@ jobs:
       - run:
           name: Backend Test
           command: |
+            cd backend
             npm test
             
 #   scan-frontend:
