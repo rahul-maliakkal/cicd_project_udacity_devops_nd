@@ -303,6 +303,7 @@ workflows:
       - scan-frontend:
           requires: [build-frontend]
       - deploy-infrastructure:
+          context: env_vars
           requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           filters:
             branches:
