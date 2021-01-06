@@ -187,7 +187,8 @@ jobs:
       - run:
           name: Checkout ws
           command: |
-            ls /tmp/workspace/project
+            ls -l
+            ls project/.circleci/ansible/inventory.txt
       - destroy-environment
       # - run:
       #     name: Configure server
