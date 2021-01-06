@@ -155,9 +155,9 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> inventory.txt
       - persist_to_workspace:
-          root: ~/
+          root: ansible
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - .circleci/ansible/inventory.txt
       # - run:
       #     command: |
       #       echo "I will fail with exit status"
@@ -177,7 +177,7 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["31:7d:61:29:9e:01:a6:b0:ab:50:9e:aa:87:7a:25:e6"]
       - attach_workspace:
-          at: /tmp/workspace
+          at: /tmp/ansible
       - run:
           name: Install dependencies
           command: |
@@ -189,11 +189,11 @@ jobs:
           command: |
             ls -l
             cat /tmp/workspace/project/.circleci/ansible/inventory.txt
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i /tmp/ansible/inventory.txt .circleci/ansible/configure-server.yml
       - destroy-environment
-      # - run:
-      #     name: Configure server
-      #     command: |
-      #       ansible-playbook -i inventory.txt playbook.yml
       # Here's where you will add some code to rollback on failure      
 
 #   run-migrations:
@@ -329,6 +329,7 @@ workflows:
             branches:
               only: [master]
       - configure-infrastructure:
+          context: env_vars
           requires: [deploy-infrastructure]
       # - run-migrations:
       #     requires: [configure-infrastructure]
