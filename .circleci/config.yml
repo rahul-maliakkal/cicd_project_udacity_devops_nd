@@ -158,7 +158,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       - run:
-        - command: |
+          command: |
             echo "I will fail with exit status"
             exit 1
       - destroy-environment  
