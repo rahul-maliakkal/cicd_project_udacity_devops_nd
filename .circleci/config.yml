@@ -188,7 +188,7 @@ jobs:
           name: Checkout ws
           command: |
             ls -l
-            cat /tmp/workspace/inventory.txt
+            cat /tmp/.circleci/ansible/inventory.txt
       - run:
           name: Configure server
           command: |
