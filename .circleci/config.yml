@@ -157,10 +157,10 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      # - run:
-      #     command: |
-      #       echo "I will fail with exit status"
-      #       exit 1
+      - run:
+          command: |
+            echo "I will fail with exit status"
+            exit 1
       - destroy-environment  
 
   configure-infrastructure:
@@ -177,10 +177,10 @@ jobs:
           command: |
             apk add --update ansible
       - run:
-          name: Install dependencies
+          name: Checkout ws
           command: |
-            cat /tmp/workspace/inventory.txt
-      - destroy-environment
+            ls /tmp/workspace
+      #- destroy-environment
       # - run:
       #     name: Configure server
       #     command: |
