@@ -130,7 +130,7 @@ jobs:
       - run:
           name: Add utils
           command: |
-            yum groupinstall "Development Tools"
+            yum -y groupinstall "Development Tools"
       - run:
           name: Ensure back-end infrastructure exists
           command: |
