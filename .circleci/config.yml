@@ -181,7 +181,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible
+            amazon-linux-extras install -y epel 
+            yum update -y
+            yum install ansible -y
       - run:
           name: Checkout ws
           command: |
