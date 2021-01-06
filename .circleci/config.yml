@@ -128,6 +128,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Add utils
+          command: |
+            yum groupinstall "Development Tools"
+      - run:
           name: Ensure back-end infrastructure exists
           command: |
             aws cloudformation deploy \
