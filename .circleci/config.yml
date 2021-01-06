@@ -157,15 +157,15 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      - run:
-          command: |
-            echo "I will fail with exit status"
-            exit 1
+      # - run:
+      #     command: |
+      #       echo "I will fail with exit status"
+      #       exit 1
       - destroy-environment  
 
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: amazon/aws-cli
     steps:
       - checkout
       - add_ssh_keys:
@@ -180,7 +180,7 @@ jobs:
           name: Checkout ws
           command: |
             ls /tmp/workspace
-      #- destroy-environment
+      - destroy-environment
       # - run:
       #     name: Configure server
       #     command: |
