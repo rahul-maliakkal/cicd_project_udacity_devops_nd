@@ -131,6 +131,7 @@ jobs:
           name: Add utils
           command: |
             yum -y install tar
+            yum -y install gzip
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -171,7 +172,8 @@ jobs:
       - run:
           name: Add utils
           command: |
-            yum -y install tar gzip
+            yum -y install tar
+            yum -y install gzip
       - add_ssh_keys:
           fingerprints: ["31:7d:61:29:9e:01:a6:b0:ab:50:9e:aa:87:7a:25:e6"]
       - attach_workspace:
