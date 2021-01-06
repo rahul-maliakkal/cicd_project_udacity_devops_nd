@@ -187,7 +187,7 @@ jobs:
       - run:
           name: Checkout ws
           command: |
-            ls /tmp/workspace
+            ls /tmp/workspace/project
       - destroy-environment
       # - run:
       #     name: Configure server
