@@ -24,8 +24,5 @@
       pause:
         seconds: 120
 
-    - name: "install python for Ansible."
-      raw: 'apt-get -y install python'
-
   roles:
     - configure-server
