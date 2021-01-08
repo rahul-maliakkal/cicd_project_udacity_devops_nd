@@ -188,10 +188,8 @@ jobs:
             cat /tmp/.circleci/ansible/inventory.txt
       - run:
           name: Configure server
-          environment:
-            ANSIBLE_HOST_KEY_CHECKING: False
           command: |
-            echo $ANSIBLE_HOST_KEY_CHECKING
+            export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i /tmp/.circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
       - destroy-environment
       # Here's where you will add some code to rollback on failure      
