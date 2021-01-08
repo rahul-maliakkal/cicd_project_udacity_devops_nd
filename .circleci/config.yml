@@ -188,6 +188,8 @@ jobs:
             cat /tmp/.circleci/ansible/inventory.txt
       - run:
           name: Configure server
+          environment:
+            ANSIBLE_HOST_KEY_CHECKING: False
           command: |
             ansible-playbook -i /tmp/.circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
       - destroy-environment
