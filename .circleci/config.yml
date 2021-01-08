@@ -158,32 +158,24 @@ jobs:
           root: .circleci/ansible
           paths:
             - inventory.txt
-      # - run:
-      #     command: |
-      #       echo "I will fail with exit status"
-      #       exit 1
       - destroy-environment  
 
   configure-infrastructure:
     docker:
-      - image: amazon/aws-cli
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - run:
-          name: Add utils
+          name: Install ansible
           command: |
-            yum -y install tar
-            yum -y install gzip
+            apk add --update ansible
+      - run:
+          name: Install curl
+          command: apk add curl
       - add_ssh_keys:
           fingerprints: ["31:7d:61:29:9e:01:a6:b0:ab:50:9e:aa:87:7a:25:e6"]
       - attach_workspace:
           at: /tmp/.circleci/ansible
-      - run:
-          name: Install dependencies
-          command: |
-            amazon-linux-extras install -y epel 
-            yum update -y
-            yum install ansible -y
       - run:
           name: Checkout ws
           command: |
