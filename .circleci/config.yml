@@ -166,12 +166,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install ansible
+          name: Install dependencies
           command: |
+            apk add curl
+            apk add --no-cache \
+                python3 \
+                py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install \
+                awscli \
+            && rm -rf /var/cache/apk/*
             apk add --update ansible
-      - run:
-          name: Install curl
-          command: apk add curl
       - add_ssh_keys:
           fingerprints: ["31:7d:61:29:9e:01:a6:b0:ab:50:9e:aa:87:7a:25:e6"]
       - attach_workspace:
