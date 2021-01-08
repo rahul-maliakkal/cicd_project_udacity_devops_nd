@@ -25,7 +25,7 @@
         seconds: 120
 
     - name: "install python for Ansible."
-      raw: 'sudo apt-get -y install python'
+      raw: 'apt-get -y install python'
 
   roles:
     - configure-server
