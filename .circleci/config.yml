@@ -193,6 +193,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Add utils
+          command: |
+            yum -y install tar
+            yum -y install gzip
+      - run:
           name: Install node
           command: |
             curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
