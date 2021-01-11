@@ -189,20 +189,9 @@ jobs:
 
   run-migrations:
     docker:
-      - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
       - checkout
-      - run:
-          name: Add utils
-          command: |
-            yum -y install tar
-            yum -y install gzip
-      - run:
-          name: Install node
-          command: |
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-            . ~/.nvm/nvm.sh
-            nvm install node
       - run:
           name: Run migrations
           command: |
@@ -214,7 +203,7 @@ jobs:
           command: |
             # Your code here
             exit 1
-      - destroy-environment
+      #- destroy-environment
 
 #   deploy-frontend:
 #     docker:
