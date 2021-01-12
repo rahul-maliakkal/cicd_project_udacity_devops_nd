@@ -6,13 +6,13 @@
 
 - name: Copy backend dist files to remote server
   copy:
-    src: backend
+    src: /root/project/backend.tar.gz
     dest: /home/ubuntu
 
 - name: Untar file
   shell: |
     cd /home/ubuntu
-    tar -xvzf backend.tgz
+    tar -xvzf backend.tar.gz
 
 - name: Install Node modules
   shell: |
@@ -26,11 +26,6 @@
     cd /home/ubuntu/backend
     npm run build
     npm run prestart:prod
-
-- name: "run migrations again"
-  shell: |
-    cd /home/ubuntu/backend
-    npm run migrations
     
 - name: Executing node
   become: true
