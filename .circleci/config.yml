@@ -198,7 +198,10 @@ jobs:
             cd backend
             npm install
             npm run migrations >> migrations.txt
+            echo 'DISPLAY CONTENTS'
+            echo '-----------------'
             cat migrations.txt
+            echo '-----------------'
       - run:
           name: Send migration results to memstash
           command: |
@@ -233,6 +236,7 @@ jobs:
             cd frontend
             npm install
             npm run build
+            npm audit fix --audit-level=critical --force
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             cat .env
             ls -la           
