@@ -370,9 +370,9 @@ workflows:
       - run-migrations:
           context: env_vars
           requires: [configure-infrastructure]
-      - deploy-frontend:
-          context: env_vars
-          requires: [run-migrations]
+      # - deploy-frontend:
+      #     context: env_vars
+      #     requires: [run-migrations]
       - deploy-backend:
           context: env_vars
           requires: [run-migrations]

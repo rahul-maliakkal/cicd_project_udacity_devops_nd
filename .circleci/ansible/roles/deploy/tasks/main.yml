@@ -1,8 +1,12 @@
 ---
 
+- name: ls
+  shell: |
+    ls -al
+
 - name: Copy backend dist files to remote server
   copy:
-    src: 
+    src: backend
     dest: /home/ubuntu
 
 - name: Untar file
