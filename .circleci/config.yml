@@ -277,6 +277,10 @@ jobs:
             tar -C backend -czvf artifact.tar.gz .
             cd .circleci/ansible
       - run:
+          name: install dependencies
+          command: 
+            apk add --update ansible
+      - run:
           name: Deploy backend
           command: |
             ansible-playbook -i /tmp/.circleci/ansible/inventory.txt .circleci/ansible/deploy.yml
