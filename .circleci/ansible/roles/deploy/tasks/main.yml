@@ -2,8 +2,13 @@
 
 - name: Copy backend dist files to remote server
   copy:
-    src: /root/project/backend
+    src: 
     dest: /home/ubuntu
+
+- name: Untar file
+  shell: |
+    cd /home/ubuntu
+    tar -xvzf backend.tgz
 
 - name: Install Node modules
   shell: |
