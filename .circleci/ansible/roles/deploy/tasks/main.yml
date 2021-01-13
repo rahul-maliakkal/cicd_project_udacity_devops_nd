@@ -1,9 +1,5 @@
 ---
 
-- name: ls
-  shell: |
-    ls -al
-
 - name: Copy backend dist files to remote server
   copy:
     src: /root/project/backend.tar.gz
@@ -17,8 +13,6 @@
 - name: Install Node modules
   shell: |
     cd /home/ubuntu/backend
-    ls -la
-    printenv
     npm install
 
 - name: building node services
