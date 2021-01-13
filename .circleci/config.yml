@@ -16,7 +16,7 @@ commands:
           command: |
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
-            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --force 
+            aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}
             aws s3 rb s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --force  
 
 
@@ -315,7 +315,7 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-            S3_URL=s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3.ap-south-1.amazonaws.com
+            S3_URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com
             if curl -s ${S3_URL}
             then
               return 0
