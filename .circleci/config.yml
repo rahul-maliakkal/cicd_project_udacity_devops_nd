@@ -263,7 +263,7 @@ jobs:
       - attach_workspace:
           at: /tmp/.circleci/ansible
       - run:
-          name: Install dependencies
+          name: Set env vars
           command: |
             echo ENVIROMENT=development > "backend/.env"
             echo TYPEORM_CONNECTION=postgres >> "backend/.env"
@@ -281,11 +281,13 @@ jobs:
           name: install dependencies
           command: 
             apk add --update ansible
+            apk add --update curl nodejs npm
+            pip install awscli
       - run:
           name: Deploy backend
           command: |
             ansible-playbook -i /tmp/.circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
-      # Here's where you will add some code to rollback on failure  
+      - destroy-environment
 
   smoke-test:
     docker:
@@ -298,23 +300,15 @@ jobs:
             apk add --update curl nodejs npm
             pip install awscli
       - run:
-          name: Get backend url
+          name: Get backend url and smoke test BE
           command: |
             BACKEND_IP=$(aws ec2 describe-instances \
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             echo "${BACKEND_IP}"
-            export API_URL="http://${BACKEND_IP}:3030"
-      - run:
-          name: Backend smoke test.
-          command: |
-            if curl -s ${API_URL}
-            then
-              return 0
-            else
-              return 1
-            fi
+            API_URL="http://${BACKEND_IP}:3030"
+            curl -s ${API_URL}
       - run:
           name: Frontend smoke test.
           command: |
@@ -325,7 +319,7 @@ jobs:
             else
               return 1
             fi
-      # Here's where you will add some code to rollback on failure  
+      - destroy-environment
 
 #   cloudfront-update:
 #     docker:
