@@ -258,6 +258,11 @@ jobs:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update curl nodejs npm
+            pip install awscli
       - add_ssh_keys:
           fingerprints: ["df:e2:17:49:7c:22:8f:6b:6f:da:10:8b:b5:6d:90:4b"]
       - attach_workspace:
@@ -278,10 +283,9 @@ jobs:
             tar czf backend.tar.gz backend/
             cd .circleci/ansible
       - run:
-          name: install dependencies
+          name: install ansible
           command: 
-            apk add --update ansible curl nodejs npm
-            pip install awscli
+            apk add --update ansible
       - run:
           name: Deploy backend
           command: |
