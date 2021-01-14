@@ -319,27 +319,35 @@ jobs:
             S3_URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com
             if curl -s ${S3_URL} | grep "Welcome"
             then
-              return 1
+              return 0
             else
               return 1
             fi
       - destroy-environment
       - revert-migrations
 
-#   cloudfront-update:
-#     docker:
-#       # Docker image here that supports AWS CLI
-#     steps:
-#       # Checkout code from git
-#       - run:
-#           name: Install dependencies
-#           command: |
-#             # your code here
-#       - run:
-#           name: Update cloudfront distribution
-#           command: |
-#             # your code here
-#       # Here's where you will add some code to rollback on failure  
+  cloudfront-update:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            curl -sL https://rpm.nodesource.com/setup_lts.x | bash -
+            yum -y install nodejs
+            yum -y install tar
+            yum -y install gzip
+      - run:
+          name: Update cloudfront distribution
+          command: |
+            aws cloudformation update-stack \
+              --template-file .circleci/files/cloudfront.yml \
+              --tags project=udapeople \
+              --stack-name "udapeople-cloudfront" \
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
+      - destroy-environment
+      - revert-migrations
 
 # cleanup:
 #     docker:
