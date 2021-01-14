@@ -14,11 +14,10 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
-            aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
             aws s3 rm s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}
             aws s3 rb s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --force  
-
+            aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
+            aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -27,16 +26,16 @@ commands:
     steps:
       - run:
           name: Revert migrations
-          # Add when this will run
+          when: on_fail
           command: |
-            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            SUCCESS = 1
+            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS=curl -H "token: ${CIRCLE_WORKFLOW_ID:0:7}" --request GET https://api.memstash.io/values/${CIRCLE_WORKFLOW_ID:0:7}
+
             if(( $SUCCESS==1 )); 
             then
-            #  cd ~/project/backend
-            #  npm install
-            #  Add revert code here. You can find this in the Getting Started section.
-              exit 1
+             cd ~/project/backend
+             npm install
+             npm run migrations:revert
+             exit 1
             fi
             
 jobs:
@@ -252,6 +251,7 @@ jobs:
             ls -la           
             aws s3 sync dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}
       - destroy-environment
+      - revert-migrations
                     
   deploy-backend:
     docker:
@@ -291,6 +291,7 @@ jobs:
           command: |
             ansible-playbook -i /tmp/.circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
       - destroy-environment
+      - revert-migrations
 
   smoke-test:
     docker:
@@ -313,16 +314,17 @@ jobs:
             API_URL="http://${BACKEND_IP}:3030"
             curl -s ${API_URL}
       - run:
-          name: Frontend smoke test.
+          name: Frontend smoke test
           command: |
             S3_URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.ap-south-1.amazonaws.com
-            if curl -s ${S3_URL}
+            if curl -s ${S3_URL} | grep "Welcome"
             then
-              return 0
+              return 1
             else
               return 1
             fi
       - destroy-environment
+      - revert-migrations
 
 #   cloudfront-update:
 #     docker:
