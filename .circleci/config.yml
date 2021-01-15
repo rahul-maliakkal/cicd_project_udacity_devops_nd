@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  slack: circleci/slack@4.2.0
+
 defaults: &defaults
   docker:
     - image: circleci/node:13.8.0
@@ -84,6 +87,10 @@ jobs:
             cd frontend
             npm install
             npm test
+      - slack/notify:
+          channel: general
+          event: fail
+          template: basic_fail_1
                 
   test-backend:
     <<: *defaults
@@ -97,6 +104,10 @@ jobs:
             cd backend
             npm install
             npm test
+      - slack/notify:
+          channel: general
+          event: fail
+          template: basic_fail_1
             
   scan-frontend:
     <<: *defaults
