@@ -373,6 +373,7 @@ jobs:
             --query "StackSummaries[*].StackName" \
             --stack-status-filter CREATE_COMPLETE \
             --no-paginate --output text)
+            
             echo OldWorkflowID: "$OldWorkflowID"
             echo STACKS: "$STACKS" 
             
@@ -381,8 +382,8 @@ jobs:
               echo "Old stacks do exist"
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
               aws s3 rb s3://udapeople-${OldWorkflowID} --force
-              aws cloudformation delete-stack --stack-name backend-${OldWorkflowID}
-              aws cloudformation delete-stack --stack-name frontend-${OldWorkflowID}
+              aws cloudformation delete-stack --stack-name udapeople-backend-${OldWorkflowID}
+              aws cloudformation delete-stack --stack-name udapeople-frontend-${OldWorkflowID}
               echo "Stacks deleted succesfully"
             else
               echo "Fresh New Stacks"
