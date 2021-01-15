@@ -26,7 +26,7 @@ import { EmployeeModule } from '../domain/employees/employee.module';
     OrdersModule,
     EmployeeModule,
   ],
-  controllers: [StatusController],
+  controllers: [StatusConsstroller],
   providers: [AppService, AppLogger],
 })
 export class AppModule {}
