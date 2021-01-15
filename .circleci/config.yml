@@ -428,4 +428,5 @@ workflows:
           context: env_vars
           requires: [smoke-test]
       - cleanup:
+          context: env_vars
           requires: [cloudfront-update]
