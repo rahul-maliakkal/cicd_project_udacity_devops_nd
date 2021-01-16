@@ -309,10 +309,6 @@ jobs:
           name: Deploy backend
           command: |
             ansible-playbook -i /tmp/.circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
-      - slack/notify:
-          channel: '#general'
-          event: pass
-          template: success_tagged_deploy_1
       - destroy-environment
       - revert-migrations
 
