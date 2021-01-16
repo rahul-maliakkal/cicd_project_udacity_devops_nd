@@ -269,10 +269,6 @@ jobs:
             cat .env
             ls -la           
             aws s3 sync dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}
-      - slack/notify:
-          channel: '#general'
-          event: pass
-          template: successful_tagged_deployment
       - destroy-environment
       - revert-migrations
                     
@@ -313,10 +309,6 @@ jobs:
           name: Deploy backend
           command: |
             ansible-playbook -i /tmp/.circleci/ansible/inventory.txt .circleci/ansible/deploy-backend.yml
-      - slack/notify:
-          channel: '#general'
-          event: pass
-          template: successful_tagged_deployment
       - destroy-environment
       - revert-migrations
 
