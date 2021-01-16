@@ -68,8 +68,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`"
                     }
                   ]
                 }
@@ -102,8 +101,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`"
                     }
                   ]
                 }
@@ -133,8 +131,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`"
                     }
                   ]
                 }
@@ -164,8 +161,7 @@ jobs:
                   "fields": [
                     {
                       "type": "mrkdwn",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`"
                     }
                   ]
                 }
