@@ -89,22 +89,8 @@ jobs:
             npm test
       - slack/notify:
           channel: '#general'
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "Test notification",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
-          event: always
+          event: fail
+          template: basic_fail_1
                 
   test-backend:
     <<: *defaults
