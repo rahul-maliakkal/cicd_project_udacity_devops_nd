@@ -89,8 +89,22 @@ jobs:
             npm test
       - slack/notify:
           channel: '#general'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
+                      "url": "${CIRCLE_BUILD_URL}"
+                    }
+                  ]
+                }
+              ]
+            }
           event: fail
-          template: basic_fail_1
                 
   test-backend:
     <<: *defaults
@@ -106,8 +120,22 @@ jobs:
             npm test
       - slack/notify:
           channel: '#general'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
+                      "url": "${CIRCLE_BUILD_URL}"
+                    }
+                  ]
+                }
+              ]
+            }
           event: fail
-          template: basic_fail_1
             
   scan-frontend:
     <<: *defaults
