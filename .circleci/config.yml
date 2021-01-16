@@ -67,9 +67,9 @@ jobs:
                   "type": "section",
                   "fields": [
                     {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
+                      "url": "${CIRCLE_BUILD_URL}"
                     }
                   ]
                 }
@@ -101,9 +101,9 @@ jobs:
                   "type": "section",
                   "fields": [
                     {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
+                      "url": "${CIRCLE_BUILD_URL}"
                     }
                   ]
                 }
@@ -132,9 +132,9 @@ jobs:
                   "type": "section",
                   "fields": [
                     {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
+                      "url": "${CIRCLE_BUILD_URL}"
                     }
                   ]
                 }
@@ -163,9 +163,9 @@ jobs:
                   "type": "section",
                   "fields": [
                     {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
+                      "url": "${CIRCLE_BUILD_URL}"
                     }
                   ]
                 }
