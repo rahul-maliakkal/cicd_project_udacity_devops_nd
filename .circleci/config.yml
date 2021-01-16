@@ -450,6 +450,7 @@ jobs:
             --no-paginate --output text)
 
             echo OldWorkflowID: "$OldWorkflowID"
+            
             echo STACKS: "$STACKS" 
             
             if [ ! -z $OldWorkflowID ]
