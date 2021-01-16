@@ -68,8 +68,8 @@ jobs:
                   "fields": [
                     {
                       "type": "plain_text",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "*This is a text notification*",
+                      "emoji": true
                     }
                   ]
                 }
@@ -102,8 +102,8 @@ jobs:
                   "fields": [
                     {
                       "type": "plain_text",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "*This is a text notification*",
+                      "emoji": true
                     }
                   ]
                 }
@@ -133,8 +133,8 @@ jobs:
                   "fields": [
                     {
                       "type": "plain_text",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "*This is a text notification*",
+                      "emoji": true
                     }
                   ]
                 }
@@ -164,8 +164,8 @@ jobs:
                   "fields": [
                     {
                       "type": "plain_text",
-                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`",
-                      "url": "${CIRCLE_BUILD_URL}"
+                      "text": "*This is a text notification*",
+                      "emoji": true
                     }
                   ]
                 }
@@ -450,7 +450,7 @@ jobs:
             --no-paginate --output text)
 
             echo OldWorkflowID: "$OldWorkflowID"
-            
+
             echo STACKS: "$STACKS" 
             
             if [ ! -z $OldWorkflowID ]
