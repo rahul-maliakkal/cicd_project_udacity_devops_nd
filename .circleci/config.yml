@@ -59,8 +59,22 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
       - slack/notify:
-          event: fail
-          template: basic_fail_1
+          channel: '#general'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`. Link `${CIRCLE_BUILD_URL}`"
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 
   build-backend:
     <<: *defaults
@@ -78,8 +92,22 @@ jobs:
           paths: [backend/node_modules]
           key: backend-build
       - slack/notify:
-          event: fail
-          template: basic_fail_1
+          channel: '#general'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`"
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 
   test-frontend:
     <<: *defaults
@@ -94,8 +122,22 @@ jobs:
             npm install
             npm test
       - slack/notify:
-          event: fail
-          template: basic_fail_1
+          channel: '#general'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`"
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
                 
   test-backend:
     <<: *defaults
@@ -110,8 +152,22 @@ jobs:
             npm install
             npm test
       - slack/notify:
-          event: fail
-          template: basic_fail_1
+          channel: '#general'
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "❌ *Failure* #${CIRCLE_BUILD_NUM} `${CIRCLE_PROJECT_REPONAME}` on `${CIRCLE_BRANCH}`"
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
             
   scan-frontend:
     <<: *defaults
