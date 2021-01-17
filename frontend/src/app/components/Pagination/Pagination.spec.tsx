@@ -46,7 +46,7 @@ describe('<Pagination>', () => {
       });
       it('Should calculate correcly the page first order index', () => {
         const expectedPageFirstOrderIndex = (currentPage - 1) * pageSize + 1;
-        expect(wrapper.state('pageFirstOrderIndex')).toBe(
+        expect(wrapper.state('pageFirstOrderndex')).toBe(
           expectedPageFirstOrderIndex,
         );
       });
