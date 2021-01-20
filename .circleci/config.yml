@@ -157,7 +157,7 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --tags project=udapeople \
+              --tags project=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7} \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
@@ -165,14 +165,14 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --tags project=udapeople \
+              --tags project=udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             aws ec2 describe-instances \
-              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --filters "Name=tag-value,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> .circleci/ansible/inventory.txt
       - persist_to_workspace:
@@ -252,7 +252,7 @@ jobs:
           name: Get backend url
           command: |
             export BACKEND_IP=$(aws ec2 describe-instances \
-              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --filters "Name=tag-value,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             echo "${BACKEND_IP}"
@@ -326,7 +326,7 @@ jobs:
           name: Get backend url and smoke test BE
           command: |
             BACKEND_IP=$(aws ec2 describe-instances \
-              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --filters "Name=tag-value,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
             echo "${BACKEND_IP}"
@@ -367,7 +367,7 @@ jobs:
 
             aws cloudformation deploy \
               --template-file .circleci/files/cloudfront.yml \
-              --tags project=udapeople \
+              --tags project=udapeople-cloudfront-${CIRCLE_WORKFLOW_ID:0:7} \
               --stack-name "udapeople-cloudfront" \
               --parameter-overrides WorkflowID="${CIRCLE_WORKFLOW_ID:0:7}" 
 
